@@ -2,14 +2,24 @@
 @main def entryPoint()= {
   class ChecksumAccumulator {
     // class definication
-    var sum = 0
+    private var sum = 0
+    
+    def add(b: Byte): Unit = {
+      sum += b
+    }
+
+    def checksum(): Int = {
+      return ~(sum & 0xFF) + 1
+    }
   }
 
   val acc = new ChecksumAccumulator
   val csa = new ChecksumAccumulator
 
-  acc.sum = 3
-
-  println(acc.sum)
-  println(csa.sum)
+  acc.add(10)
+  csa.add(1)
+  val a1 = acc.checksum()
+  val a2 = csa.checksum()
+  println(a1)
+  println(a2)
 }
